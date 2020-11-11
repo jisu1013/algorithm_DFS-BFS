@@ -22,19 +22,22 @@ def check_proper(p):
     return True
 
 def soulution(p):
-    answer=''
+    answer = ''
     if p == '':
+        return answer    
+    index = balanced_index(p)
+    if index == None:
         return answer
-    p = p[1:-1]
-    index=balanced_index(p)
-    u=p[:(index+1)]
-    v=p[(index+1):]
+    u=p[:index+1]
+    v=p[index+1:]
+    #if "correct", return function(v)
     if check_proper(u):
         answer=u+soulution(v)
+    #if not "correct"
     else:
-        answer='('
-        answer+=soulution(v)
-        answer+=')'
+        answer = '('
+        answer += soulution(v)
+        answer += ')'
         u=list(u[1:-1])
         for i in range(len(u)):
             if u[i] == '(':
